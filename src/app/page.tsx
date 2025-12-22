@@ -1,110 +1,123 @@
 "use client";
+
 import { useRouter } from "next/navigation";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 
 export default function Landing() {
   const router = useRouter();
 
+  // Fungsi navigasi yang lebih stabil
+  const handleStart = () => {
+    router.push("/form");
+  };
+
   return (
-    // Penyesuaian py-10 dan md:py-20 agar konten tidak terpotong di device pendek
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center p-4 py-10 md:py-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center justify-center p-4 py-10 md:py-20 overflow-x-hidden">
       <div className="max-w-6xl w-full mx-auto">
         
         {/* Header Section */}
-        <div className="text-center mb-8 md:mb-16 animate-in fade-in slide-in-from-top-4 duration-1000">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 md:w-3 md:h-3 bg-blue-500 rounded-full animate-pulse"></div>
-            <span className="text-xs md:text-sm font-semibold text-blue-600 tracking-widest uppercase">
+        <header className="text-center mb-10 md:mb-10 animate-in fade-in slide-in-from-top-4 duration-1000">
+          <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-blue-50 rounded-full border border-blue-100">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-blue-600 animate-pulse" />
+            <span className="text-[10px] md:text-xs font-bold text-blue-700 tracking-widest uppercase">
               AI Resume Builder
             </span>
           </div>
-          <p className="text-xs md:text-sm text-gray-500 font-medium tracking-tight">
+          <h2 className="text-xs md:text-sm text-gray-400 font-semibold tracking-[0.2em] uppercase mt-1">
             Tingkatkan Karier dengan Kecerdasan Buatan
-          </p>
-        </div>
+          </h2>
+        </header>
 
-        {/* Main Content Grid: Stacked on Mobile, 2 Columns on Desktop */}
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+        {/* Main Content Grid */}
+        <main className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           
           {/* Left Side: Content */}
-          <div className="order-2 lg:order-1 space-y-6 md:space-y-8 text-center lg:text-left animate-in fade-in slide-in-from-left-8 duration-1000">
-            <div className="space-y-4">
-              {/* Ukuran font responsif: text-3xl di mobile, text-6xl di desktop */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-[1.1]">
-                CV yang <span className="font-bold text-blue-600">Membuat</span> Anda{' '}
-                <span className="font-bold text-blue-600 block sm:inline">Dilirik</span>
+          <div className="order-2 lg:order-1 space-y-8 text-center lg:text-left animate-in fade-in slide-in-from-left-8 duration-1000">
+            <div className="space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 leading-[1.05] tracking-tight">
+                Bangun <span className="font-extrabold text-blue-600 drop-shadow-sm">Representasi</span> Karier yang{' '}
+                <span className="font-extrabold text-blue-600 block sm:inline italic">Prestesius</span>
               </h1>
-              <p className="text-sm md:text-base lg:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                Buat resume profesional yang dioptimalkan AI dalam hitungan menit. 
-                Dapatkan pekerjaan impian dengan konten yang persuasif dan ATS-Friendly.
+              <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
+                Optimalkan rekam jejak profesional Anda melalui bantuan kecerdasan buatan. 
+                Wujudkan resume yang strategis, elegan, dan dirancang khusus untuk memenuhi standar ketat sistem <span className="text-slate-900 font-bold underline decoration-blue-500 decoration-2">ATS-Friendly</span>.
               </p>
             </div>
 
-            {/* Feature List: Center on mobile, Left on desktop */}
-            <div className="space-y-3 md:space-y-4 inline-block lg:block text-left">
+            {/* Feature List */}
+            <div className="space-y-3 inline-block lg:block text-left bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-100 shadow-sm lg:bg-transparent lg:border-none lg:shadow-none lg:p-0">
               {[
-                "Template Modern & Minimalis",
-                "Optimasi AI Llama 3.3",
-                "Format Siap Cetak (A4)",
-                "Gratis Tanpa Registrasi"
+                "Template Eksekutif & Minimalis",
+                "Optimasi Narasi Berbasis AI Llama 3.3",
+                "Format PDF Standar Industri (A4)",
+                "Privasi Data Terjamin & Tanpa Registrasi"
               ].map((text, i) => (
                 <div key={i} className="flex items-center gap-3 group">
-                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-blue-500 flex-shrink-0" />
-                  <p className="text-sm md:text-base text-gray-700 font-medium">{text}</p>
+                  <div className="bg-blue-600 rounded-full p-0.5 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                  </div>
+                  <p className="text-sm md:text-base text-slate-700 font-bold">{text}</p>
                 </div>
               ))}
             </div>
 
-            <div className="pt-4 flex flex-col items-center lg:items-start gap-4">
+            <div className="pt-0 flex flex-col items-center lg:items-start gap-5">
               <button
-                onClick={() => router.push("/form")}
-                className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-200 hover:shadow-2xl transform hover:-translate-y-1 active:scale-95"
+                onClick={handleStart}
+                className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-all duration-300 shadow-2xl shadow-blue-200 hover:shadow-blue-300 transform hover:-translate-y-1 active:scale-95 border-b-4 border-blue-800"
               >
-                <span className="font-bold text-base md:text-lg">Mulai Buat CV</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="font-bold text-lg md:text-xl tracking-tight">Mulai Buat CV Gratis</span>
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
-              <p className="text-[10px] md:text-xs text-gray-400 italic">
-                *Data Anda aman dan disimpan secara lokal di browser.
-              </p>
+              <div className="flex flex-col items-center lg:items-start gap-1">
+                <p className="text-[10px] md:text-xs text-slate-400 font-medium italic">
+                  *Tidak perlu kartu kredit atau registrasi akun.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Right Side: Illustration */}
-          {/* order-1 on mobile so image stays on top, order-2 on desktop */}
-          <div className="order-1 lg:order-2 relative animate-in fade-in slide-in-from-right-8 duration-1000 px-4 sm:px-10 lg:px-0">
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-blue-50">
-              <div className="aspect-[4/3] bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4 md:p-8">
-                {/* Mock CV: Scaled down on mobile */}
-                <div className="relative w-full max-w-[280px] sm:max-w-md bg-white rounded-xl md:rounded-2xl shadow-2xl p-4 md:p-6 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-                  <div className="space-y-3 md:space-y-4">
-                    <div className="flex items-center gap-3 md:gap-4 border-b border-gray-100 pb-3 md:pb-4">
-                      <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg md:text-xl">
-                        JD
+          <div className="order-1 lg:order-2 relative animate-in fade-in slide-in-from-right-8 duration-1000 px-2 sm:px-10 lg:px-0">
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border-8 border-white">
+              <div className="aspect-[4/3] bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 flex items-center justify-center p-6 md:p-12">
+                
+                {/* Mock CV Visual */}
+                <div className="relative w-full max-w-[280px] sm:max-w-md bg-white rounded-2xl shadow-2xl p-5 md:p-8 transform -rotate-3 hover:rotate-0 transition-transform duration-700 ease-out cursor-pointer group">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 border-b border-slate-100 pb-5">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-slate-900 flex items-center justify-center text-white font-black text-xl md:text-2xl group-hover:bg-blue-600 transition-colors">
+                        CV
                       </div>
-                      <div className="space-y-1 md:space-y-2">
-                        <div className="h-3 md:h-4 w-24 md:w-32 bg-gray-900 rounded"></div>
-                        <div className="h-2 md:h-3 w-16 md:w-24 bg-blue-500/20 rounded"></div>
+                      <div className="space-y-2">
+                        <div className="h-4 w-32 md:w-40 bg-slate-900 rounded-full"></div>
+                        <div className="h-3 w-20 md:w-28 bg-blue-100 rounded-full"></div>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="h-1.5 md:h-2 w-full bg-gray-100 rounded"></div>
-                      <div className="h-1.5 md:h-2 w-full bg-gray-100 rounded"></div>
-                      <div className="h-1.5 md:h-2 w-2/3 bg-gray-100 rounded"></div>
+                    <div className="space-y-3">
+                      <div className="h-2 w-full bg-slate-100 rounded-full"></div>
+                      <div className="h-2 w-full bg-slate-100 rounded-full"></div>
+                      <div className="h-2 w-4/5 bg-slate-100 rounded-full"></div>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 md:gap-3 pt-2">
-                      <div className="h-12 md:h-16 bg-blue-50 rounded-lg border border-blue-100"></div>
-                      <div className="h-12 md:h-16 bg-gray-50 rounded-xl border border-gray-100"></div>
+                    <div className="pt-4 flex gap-3">
+                      <div className="h-14 w-full bg-slate-50 rounded-xl border border-slate-100"></div>
+                      <div className="h-14 w-full bg-slate-50 rounded-xl border border-slate-100"></div>
                     </div>
+                  </div>
+                  {/* Floating badge */}
+                  <div className="absolute -top-4 -right-4 bg-yellow-400 text-slate-900 text-[10px] font-black px-3 py-1.5 rounded-lg shadow-xl uppercase tracking-tighter transform rotate-12">
+                    ATS Approved
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Background Decorations: Hidden on small screens to avoid clutter */}
-            <div className="hidden md:block absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-400/5 rounded-full blur-3xl"></div>
+            {/* Background Decorations */}
+            <div className="hidden md:block absolute -z-10 -top-10 -right-10 w-64 h-64 bg-blue-400/10 rounded-full blur-[100px]"></div>
+            <div className="hidden md:block absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-indigo-400/10 rounded-full blur-[100px]"></div>
           </div>
           
-        </div>
+        </main>
       </div>
     </div>
   );
