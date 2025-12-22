@@ -149,7 +149,10 @@ export default function FormPage() {
       const cvData = {
         ...formData,
         optimized: data.optimized,
-        skills: formData.skills.split(",").map(s => s.trim()).filter(Boolean),
+        // Pastikan skills selalu dalam bentuk array saat disimpan
+        skills: typeof formData.skills === 'string' 
+          ? formData.skills.split(",").map(s => s.trim()).filter(Boolean)
+          : formData.skills,
       };
       
       localStorage.setItem('cvData', JSON.stringify(cvData));

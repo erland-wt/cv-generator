@@ -31,26 +31,32 @@ function PreviewContent() {
 
   useEffect(() => {
     const loadData = () => {
+      // 1. Prioritas: Ambil dari localStorage (Cepat dan Kapasitas Besar)
       const savedData = localStorage.getItem('cvData');
+      
       if (savedData) {
         try {
           const parsedData = JSON.parse(savedData);
           setCvData(parsedData);
           setLoading(false);
-          return;
+          return; // Berhasil, keluar dari fungsi
         } catch (error) {
-          console.error("Error parsing localStorage data:", error);
+          console.error("Gagal parse localStorage:", error);
         }
       }
 
+      // 2. Fallback: Ambil dari URL (Hanya jika localStorage kosong)
       const dataParam = searchParams.get('data');
       if (dataParam) {
         try {
+          // Tambahkan pengecekan pola dasar JSON sebelum didecode
           const decoded = decodeURIComponent(dataParam.replace(/\+/g, " "));
-          const parsedData = JSON.parse(decoded);
-          setCvData(parsedData);
+          if (decoded.startsWith('{') && decoded.endsWith('}')) {
+            const parsedData = JSON.parse(decoded);
+            setCvData(parsedData);
+          }
         } catch (error) {
-          console.error("Error decoding or parsing query params:", error);
+          console.error("Pola URL tidak valid:", error);
         }
       }
       
