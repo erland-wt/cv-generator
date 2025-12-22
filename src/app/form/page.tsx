@@ -137,28 +137,44 @@ export default function FormPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/optimize", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    const res = await fetch("/api/optimize", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Gagal optimalisasi");
+    // CEK APAKAH RESPON OK
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || `Error ${res.status}`);
+    }
 
-      const cvData = {
-        ...formData,
-        optimized: data.optimized,
-        // Pastikan skills selalu dalam bentuk array saat disimpan
-        skills: typeof formData.skills === 'string' 
-          ? formData.skills.split(",").map(s => s.trim()).filter(Boolean)
-          : formData.skills,
-      };
-      
-      localStorage.setItem('cvData', JSON.stringify(cvData));
-      router.push(`/preview`);
+    // CEK APAKAH RESPON KOSONG SEBELUM PARSE JSON
+    const text = await res.text();
+    if (!text) {
+      throw new Error("Server mengirim respon kosong. Silakan coba lagi.");
+    }
+
+    const data = JSON.parse(text);
+
+    if (!data.optimized) {
+      throw new Error("Format data AI tidak sesuai.");
+    }
+
+    // SIMPAN DATA
+    const cvData = {
+      ...formData,
+      optimized: data.optimized,
+      skills: formData.skills.split(",").map((s) => s.trim()).filter(Boolean),
+    };
+    
+    localStorage.setItem('cvData', JSON.stringify(cvData));
+    router.push('/preview');
+
     } catch (err: any) {
-      alert(err.message);
+      console.error(err);
+      // Tampilkan pesan error yang lebih manusiawi
+      alert(err.message || "Terjadi kesalahan saat memproses AI.");
     } finally {
       setLoading(false);
     }
