@@ -42,4 +42,4 @@ yarn-error.log*
 next-env.d.ts
 
 # route
-src/app/api/optimize/route.ts
+**/route.ts
